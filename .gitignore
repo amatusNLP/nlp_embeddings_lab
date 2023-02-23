@@ -1,0 +1,6 @@
+**/__pycache__
+artprep.py
+morphological_ebeddings.ipynb
+embeddings.ipynb
+.tmp*
+files/
