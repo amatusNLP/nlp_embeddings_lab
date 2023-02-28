@@ -8,7 +8,8 @@ import numpy as np
 import random
 import chars2vec
 
-def relsets_from_tsv(tsv_file, json_file):
+
+def relsets_from_tsv(tsv_file: str, relset_file: str):
     with codecs.open(tsv_file, 'r', 'utf8') as filein:
         lines = filein.readlines()
         lines = [l.strip().split('\t') for l in lines]
@@ -17,10 +18,11 @@ def relsets_from_tsv(tsv_file, json_file):
         deriv_list[k].add(v)
     new_data = {i:list(v.union({k})) for i, (k, v) in 
                 enumerate(deriv_list.items())}
-    with codecs.open(json_file, "w", "utf8") as fileout:
+    with codecs.open(relset_file, "w", "utf8") as fileout:
         json.dump(new_data, fileout, indent=1)
 
-def gen_dataset(relset_file, pickle_file, negtive_multiplier=1):
+
+def gen_dataset(relset_file: str, dataset_file: str, neg_sample=1):
     with codecs.open(relset_file, "r", "utf8") as filein:
         relset = json.load(filein)
     relset = list(relset.values())
@@ -28,7 +30,7 @@ def gen_dataset(relset_file, pickle_file, negtive_multiplier=1):
                                            for s in relset]))
     n = len((X_positive))
     y_positive = np.zeros(n)
-    n = n*negtive_multiplier
+    n = n * neg_sample
     X_negative = list()
     for _ in range(n):
         i1, i2 = random.sample(range(len(relset)), 2)
@@ -41,13 +43,15 @@ def gen_dataset(relset_file, pickle_file, negtive_multiplier=1):
     y_train = np.concatenate((y_positive, y_negative))
     X_train, y_train = shuffle(X_train, y_train)
     data = {"X":X_train, "y":y_train}
-    with open(pickle_file, "wb") as fileout:
+    with open(dataset_file, "wb") as fileout:
         pickle.dump(data, fileout)
+
 
 def load_dataset(pickle_file):
     with open(pickle_file, "rb") as filein:
         data = pickle.load(filein)
     return data["X"], data["y"]
+
 
 def gen_embeddings(path_to_model, wordlist, w2v_file):
     c2v_model = chars2vec.load_model(path_to_model)

@@ -15,10 +15,13 @@ setup(
       zip_safe=False,
       install_requires=[
               'gensim',
-              'sklearn',
+              'scikit-learn',
               'chars2vec',
               'conll_iterator',
               'tqdm',
+              'keras',
+              'tensorflow',
               ],
+        dependency_links = ['https://github.com/IntuitionEngineeringTeam/chars2vec']
       )
 
