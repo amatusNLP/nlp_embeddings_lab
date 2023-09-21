@@ -21,7 +21,7 @@ def gen_alacarte_matrix(dumproot: str, linesentence: str, source_vectors: str,
         'dumproot': dumproot
     }
     comand = 'python {alacarte} {dumproot} -s {vectors} -c {corpus}' \
-        ' -w {window}'.format_map(kwargs)
+        ' -w {window}'
     os.system(comand.format_map(kwargs))
     
 
