@@ -20,7 +20,7 @@ def gen_alacarte_matrix(dumproot: str, linesentence: str, source_vectors: str,
         'window': window,
         'dumproot': dumproot
     }
-    comand = 'python {alacarte} {dumproot} -s {vectors} -c {corpus}' \
+    comand = 'python "{alacarte}" "{dumproot}" -s "{vectors}" -c "{corpus}"' \
         ' -w {window}'
     os.system(comand.format_map(kwargs))
     
@@ -39,8 +39,8 @@ def gen_vecs(dumproot: str, targets: str, matrix: str, linesentence: str,
         'targets': targets,
         'dumproot': dumproot
     }
-    comand = 'python {alacarte} -v -m {matrix} -s {vectors} -w {window}' \
-         ' -c {corpus} -t {targets} {dumproot} --create-new'
+    comand = 'python "{alacarte}" -v -m "{matrix}" -s "{vectors}" -w "{window}"' \
+         ' -c "{corpus}" -t "{targets}" "{dumproot}" --create-new'
     os.system(comand.format_map(kwargs))
 
 
