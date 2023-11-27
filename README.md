@@ -99,6 +99,6 @@ Generate static word embeddings from a BERT model.
 from embeddings_lab import BertEmbeddings
 
 model = BertEmbeddings(model="dbmdz/bert-base-italian-uncased")
-model.train("sample/sample_corpus.conllu", minfreq=10)
+model.gen_embeddings("sample/sample_corpus.conllu", minfreq=10)
 model.save_model(bert_ita")
 ```
