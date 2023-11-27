@@ -21,6 +21,8 @@ setup(
               'tqdm',
               'keras',
               'tensorflow',
+              'transformers',
+              'pytorch'
               ],
         dependency_links = ['https://github.com/IntuitionEngineeringTeam/chars2vec']
       )
