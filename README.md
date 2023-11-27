@@ -93,3 +93,12 @@ EMBEDDINGS = "sample/morphology/morphological_vectors.w2v"
 
 morphological.gen_embeddings(MODEL, WORDLIST, EMBEDDINGS)
 ```
+
+Generate static word embeddings from a BERT model.
+```
+from embeddings_lab import BertEmbeddings
+
+model = BertEmbeddings(model="dbmdz/bert-base-italian-uncased")
+model.train("sample/sample_corpus.conllu", minfreq=10)
+model.save_model(bert_ita")
+```
