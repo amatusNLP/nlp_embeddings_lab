@@ -69,7 +69,7 @@ class BertEmbeddings:
         self.word_count = {w: f for ((w, _), ), f
                            in extr.count(sentences).most_common() 
                            if f >=minfreq}
-        self.embeddings_dict = {w: torch.zeros(768).to(DEVICE) 
+        self.embeddings_dict = {w: torch.zeros(self.model.embeddings.word_embeddings.embedding_dim).to(DEVICE) 
                                 for w in self.word_count}
         
         
