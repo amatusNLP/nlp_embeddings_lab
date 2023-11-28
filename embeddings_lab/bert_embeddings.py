@@ -99,12 +99,13 @@ class BertEmbeddings:
         for sent in sentences:
             sent, words = zip(*sent)
             vecs, word_ids = self.sent2embeddings(sent)
-            for v, i in zip(vecs, word_ids):
-                vecs
+            s_vecs = defaultdict(list)
             for i, v in zip(word_ids, vecs):
                 v1 = self.embeddings_dict.get(words[i], None) 
                 if v1 is not None:
-                     self.embeddings_dict[words[i]] = v + v1
+                     s_vecs[words[i]].append(v1)
+            for word, vectors in s_vecs.items():
+                    self.embeddings_dict[word] = v + torch.mean(torch.stack(vectors))
         for w, f in self.word_count.items():
             self.embeddings_dict[w] /= f
     
