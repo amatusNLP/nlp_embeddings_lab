@@ -14,14 +14,14 @@ PATTERN = "CAND: {<ADJ>|<ADV>|<INTJ>|<NOUN>|<PROPN>|<VERB>|<ADP>|<AUX>|"\
 
 class BertEmbeddings:
 
-    def __init__(self, model='bert-base-multilingual-uncased') -> None:
+    def __init__(self, model='bert-base-multilingual-uncased', word_count=None) -> None:
         self.tokenizer = BertTokenizerFast.from_pretrained(model)
         self.model = BertModel.from_pretrained(model,
                                   output_hidden_states = True,
                                   ).to(DEVICE)
         self.model.eval()
         self.embeddings_dict = dict()
-        self.word_count = None
+        self.word_count = word_count
         self.parameters = {"model": model}
 
     def sent2embeddings(self, tokenized_text: list):
