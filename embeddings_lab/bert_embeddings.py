@@ -73,7 +73,7 @@ class BertEmbeddings:
                                 for w in self.word_count}
         
         
-    def train(self, conll_file: str, minfreq=10, lemmatized=True,
+    def gen_embeddings(self, conll_file: str, minfreq=10, lemmatized=True,
               lower=True, verbose=True):
         if not self.word_count:
             self.gen_vocab(conll_file, minfreq, lemmatized, lower, verbose)
